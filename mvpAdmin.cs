@@ -8,8 +8,7 @@ public class mvpAdmin : UdonSharpBehaviour
 {
     public GameObject[] adminObjects;
     public string[] adminUsers;
-
-
+    
     public void Start()
     {
         foreach(string adminPlayers in adminUsers) {
