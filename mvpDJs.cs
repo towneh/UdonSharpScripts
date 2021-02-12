@@ -8,8 +8,7 @@ public class mvpDJs : UdonSharpBehaviour
 {
     public GameObject[] djCollider;
     public string[] djUsers;
-
-
+    
     public void Start()
     {
         foreach(string djPlayers in djUsers) {
