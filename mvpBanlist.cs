@@ -9,7 +9,6 @@ public class mvpBanlist : UdonSharpBehaviour
     public GameObject[] banYeeter;
     public string[] bannedUsers;
 
-
     public void Start()
     {
         foreach(string bannedPlayers in bannedUsers) {
