@@ -10,7 +10,7 @@ public class TelePlayerCollider : UdonSharpBehaviour
 		
 	public override void OnPlayerTriggerEnter(VRCPlayerApi player)
 	{
-        if(player != Networking.LocalPlayer) return;
+		if(player != Networking.LocalPlayer) return;
 		int i;
 		i = Random.Range(0, teleportTargets.Length);
 		Networking.LocalPlayer.TeleportTo(teleportTargets[i].position, teleportTargets[i].rotation);
@@ -18,7 +18,7 @@ public class TelePlayerCollider : UdonSharpBehaviour
 
 	public override void OnPlayerTriggerStay(VRCPlayerApi player)
 	{
-        if(player != Networking.LocalPlayer) return;
+        	if(player != Networking.LocalPlayer) return;
 		int i;
 		i = Random.Range(0, teleportTargets.Length);
 		Networking.LocalPlayer.TeleportTo(teleportTargets[i].position, teleportTargets[i].rotation);
