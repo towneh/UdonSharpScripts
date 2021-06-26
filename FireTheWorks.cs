@@ -55,7 +55,8 @@ public class FireTheWorks : UdonSharpBehaviour
 	{
 		UpdateCooldown();
 		target.SetActive(true);
-		Invoke("DisableTarget",15f);
+		soundEffect.Play();
+		//Invoke("DisableTarget",15f);
 	}
 	
 	public void DisableTarget()
