@@ -17,7 +17,7 @@ public class FireTheWorks : UdonSharpBehaviour
 		  CheckCooldown();
 		  if (cooldownActive) return;
 		  else {
-		    SendCustomNetworkEvent(NetworkEventTarget.All, "FireTheWorks");
+		    SendCustomNetworkEvent(NetworkEventTarget.All, "TriggerTarget");
 		  }
 	  }
 	
@@ -51,7 +51,7 @@ public class FireTheWorks : UdonSharpBehaviour
 		  }
 	  }
 	
-	  public void FireTheWorks()
+	  public void TriggerTarget()
 	  {
 		UpdateCooldown();
 		target.SetActive(true);
