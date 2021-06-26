@@ -41,13 +41,13 @@ public class FireTheWorks : UdonSharpBehaviour
 	  {
 		  currentTime = Networking.GetServerTimeInMilliseconds();
 		  if (cooldownStart == 0) {
-			  cooldownActive == false;
+			  cooldownActive = false;
 		  }
 		  else if (currentTime - cooldownStart <= 300000) { 
-			  cooldownActive == true;
+			  cooldownActive = true;
 		  }
 		  else {
-			  cooldownActive == false;
+			  cooldownActive = false;
 		  }
 	  }
 	
