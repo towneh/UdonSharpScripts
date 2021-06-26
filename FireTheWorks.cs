@@ -43,7 +43,7 @@ public class FireTheWorks : UdonSharpBehaviour
 		  if (!cooldownStart) {
 			  cooldownActive == false;
 		  }
-		  elseif (currentTime - cooldownStart <= 300000) { 
+		  else if (currentTime - cooldownStart <= 300000) { 
 			  cooldownActive == true;
 		  }
 		  else {
@@ -53,9 +53,8 @@ public class FireTheWorks : UdonSharpBehaviour
 	
 	  public void FireTheWorks()
 	  {
-		  UpdateCooldown();
-		  target.SetActive(true);
-		  yield WaitForSeconds (15);
-		  target.SetActive(false);
+		UpdateCooldown();
+		target.SetActive(true);
+		Invoke(target.SetActive(false),15f);
 	  }
 }
