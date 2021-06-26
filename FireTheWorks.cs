@@ -9,14 +9,14 @@ public class FireTheWorks : UdonSharpBehaviour
 {   
     public GameObject target;
     public AudioSource soundEffect;
-    private float cooldownStart;
-    private float currentTime;
-    private bool cooldownActive;
+    private float _cooldownStart;
+    private float _currentTime;
+    private bool _cooldownActive;
     
     public override void Interact()
 	  {
 		  CheckCooldown();
-		  if (cooldownActive) return;
+		  if (_cooldownActive) return;
 		  else {
 		    SendCustomNetworkEvent(NetworkEventTarget.All, "TriggerTarget");
 		  }
@@ -26,7 +26,7 @@ public class FireTheWorks : UdonSharpBehaviour
 	  {
 		  if (Networking.IsMaster)
 		  {
-			  if (cooldownActive)
+			  if (_cooldownActive)
 			  {
 				  //How do I pass "cooldownStart" float value to late joiner if "cooldownActive" boolean is true?
 			  }
@@ -35,20 +35,21 @@ public class FireTheWorks : UdonSharpBehaviour
 	
 	  public void UpdateCooldown()
 	  {
-		  cooldownStart = Networking.GetServerTimeInMilliseconds();
+		  _cooldownStart = Networking.GetServerTimeInMilliseconds();
 	  }
 	
 	  public void CheckCooldown()
 	  {
-		  currentTime = Networking.GetServerTimeInMilliseconds();
-		  if (cooldownStart == 0) {
-			  cooldownActive = false;
+		  _currentTime = Networking.GetServerTimeInMilliseconds();
+		  if (_cooldownStart == 0) {
+			  _cooldownActive = false;
 		  }
-		  else if (currentTime - cooldownStart <= 300000) { 
-			  cooldownActive = true;
+		  // spam delay of 15 minutes between each firework session
+		  else if (_currentTime - _cooldownStart <= 900000) { 
+			  _cooldownActive = true;
 		  }
 		  else {
-			  cooldownActive = false;
+			  _cooldownActive = false;
 		  }
 	  }
 	
@@ -57,7 +58,7 @@ public class FireTheWorks : UdonSharpBehaviour
 		UpdateCooldown();
 		target.SetActive(true);
 		soundEffect.Play();
-		//Invoke("DisableTarget",15f);
+		SendCustomEventDelayedSeconds(nameof(DisableTarget), 17.0f);
 	}
 	
 	public void DisableTarget()
