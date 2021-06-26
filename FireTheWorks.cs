@@ -8,9 +8,10 @@ using VRC.Udon.Common.Interfaces;
 public class FireTheWorks : UdonSharpBehaviour
 {   
     public GameObject target;
+    public AudioSource soundEffect;
     private float cooldownStart;
-	  private float currentTime;
-	  private bool cooldownActive;
+    private float currentTime;
+    private bool cooldownActive;
     
     public override void Interact()
 	  {
