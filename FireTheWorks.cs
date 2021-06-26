@@ -40,7 +40,7 @@ public class FireTheWorks : UdonSharpBehaviour
 	  public void CheckCooldown()
 	  {
 		  currentTime = Networking.GetServerTimeInMilliseconds();
-		  if (!cooldownStart) {
+		  if (cooldownStart == 0) {
 			  cooldownActive == false;
 		  }
 		  else if (currentTime - cooldownStart <= 300000) { 
