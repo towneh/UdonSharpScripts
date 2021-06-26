@@ -51,10 +51,15 @@ public class FireTheWorks : UdonSharpBehaviour
 		  }
 	  }
 	
-	  public void TriggerTarget()
-	  {
+	public void TriggerTarget()
+	{
 		UpdateCooldown();
 		target.SetActive(true);
-		Invoke(target.SetActive(false),15f);
-	  }
+		Invoke("DisableTarget",15f);
+	}
+	
+	public void DisableTarget()
+	{
+		target.SetActive(false);
+	}
 }
