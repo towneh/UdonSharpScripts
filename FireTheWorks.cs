@@ -66,17 +66,12 @@ public class FireTheWorks : UdonSharpBehaviour
 	    _cooldownActive = false;
         }
     }
-	
-    public void PlaySFX(AudioClip sfxClip)
-    {
-        sfxSource.PlayOneShot(sfxClip);
-    }
 
     public void TriggerTarget()
     {
 	UpdateCooldown();
 	target.SetActive(true);
-        PlaySFX(sfxClip);
+        sfxSource.PlayOneShot(sfxClip);
 	SendCustomEventDelayedSeconds(nameof(DisableTarget), 17.0f);
     }
 	
