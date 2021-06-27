@@ -13,9 +13,9 @@ public class FireTheWorks : UdonSharpBehaviour
     
     [Header("SFX Source")]
     [Tooltip("Audio source object to be used")]
-    public AudioSource audioSfxSource;
+    public AudioSource sfxSource;
     [Tooltip("Audio clip to be used")]
-    public AudioClip audioSfxClip;
+    public AudioClip sfxClip;
     
     [Header("Cooldown Timer")]
     [Tooltip("Set length of time in minutes for cooldown")]
@@ -67,11 +67,16 @@ public class FireTheWorks : UdonSharpBehaviour
         }
     }
 	
+    public void PlaySFX(AudioClip sfxClip)
+    {
+        sfxSource.PlayOneShot(sfxClip);
+    }
+
     public void TriggerTarget()
     {
 	UpdateCooldown();
 	target.SetActive(true);
-        audioSfxSource.PlayOneShot(audioSfxClip, 0f);
+        PlaySFX(sfxClip);
 	SendCustomEventDelayedSeconds(nameof(DisableTarget), 17.0f);
     }
 	
