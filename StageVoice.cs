@@ -6,33 +6,59 @@ using VRC.Udon;
 
 public class StageVoice : UdonSharpBehaviour
 {
-    [Header("Voice Area")]
+    [Header("Voice Box Area")]
     [Tooltip("The collider which influences voice range")]
     public Collider voiceBox;
 	
-    [Header("Player voice")]
-    [Tooltip("Adjusts the player volume")]
+    [Header("Original Player Voice")]
+    [Tooltip("Existing player volume")]
     [Range(0f, 24f)]
-    public float voiceGain = 15f;
+    public float originalVoiceGain = 15f;
 
     [Tooltip("The end of the range for hearing a user's voice")]
-    public float voiceFar = 25f;
+    public float originalVoiceFar = 25f;
 
     [Tooltip("The near radius in meters where player audio starts to fall off, it is recommended to keep this at 0")]
-    public float voiceNear = 0f;
+    public float originalVoiceNear = 0f;
 	
-    public void OnTriggerEnter(Collider voiceBox)
+    [Header("Modified Player Voice")]
+    [Tooltip("New player volume")]
+    [Range(0f, 24f)]
+    public float modifiedVoiceGain = 15f;
+
+    [Tooltip("The end of the range for hearing a user's voice")]
+    public float modifiedVoiceFar = 25f;
+
+    [Tooltip("The near radius in meters where player audio starts to fall off, it is recommended to keep this at 0")]
+    public float modifiedVoiceNear = 0f;
+	
+    public void OnPlayerTriggerEnter(VRCPlayerApi player)
     {
-        
+        if (!player.isLocal) {
+	    // Player voice
+            player.SetVoiceGain(modifiedVoiceGain);
+            player.SetVoiceDistanceFar(modifiedVoiceFar);
+            player.SetVoiceDistanceNear(modifiedVoiceNear);
+	}
     }
 	
-    public void OnTriggerStay(Collider voiceBox)
+    public void OnPlayerTriggerStay(VRCPlayerApi player)
     {
-        
+        if (!player.isLocal) {
+	    // Player voice
+            player.SetVoiceGain(modifiedVoiceGain);
+            player.SetVoiceDistanceFar(modifiedVoiceFar);
+            player.SetVoiceDistanceNear(modifiedVoiceNear);
+	}
     }
 	
-    public void OnTriggerExit(Collider voiceBox)
+    public void OnPlayerTriggerExit(VRCPlayerApi player)
     {
-        
+        if (!player.isLocal) {
+	    // Player voice
+            player.SetVoiceGain(originalVoiceGain);
+            player.SetVoiceDistanceFar(originalVoiceFar);
+            player.SetVoiceDistanceNear(originalVoiceNear);
+ 	}
     }
 }
