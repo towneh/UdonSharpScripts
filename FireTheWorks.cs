@@ -7,9 +7,22 @@ using VRC.Udon.Common.Interfaces;
 
 public class FireTheWorks : UdonSharpBehaviour
 {   
+    [Header("Target GameObject")]
+    [Tooltip("This will be enabled/disabled with a cooldown")]
     public GameObject target;
-    public AudioSource soundEffect;
-    private float _cooldownStart;
+    
+    [Header("SFX Source")]
+    [Tooltip("Audio source object to be used")]
+    public AudioSource audioSfxSource;
+    [Tooltip("Audio clip to be used")]
+    public AudioClip audioSfxClip;
+    
+    [Header("Cooldown Timer")]
+    [Tooltip("Set length of time in minutes for cooldown")]
+    [Range(1, 30)]
+    public int cooldownDelay = 5;
+    
+    [UdonSynced] private float _cooldownStart;
     private float _currentTime;
     private bool _cooldownActive;
     
@@ -28,7 +41,6 @@ public class FireTheWorks : UdonSharpBehaviour
 	{
 	    if (_cooldownActive)
 	    {
-		//How do I pass "cooldownStart" float value to late joiner if "cooldownActive" boolean is true?
 	        SendCustomNetworkEvent(NetworkEventTarget.All, "SerializeData");
             }
         }
@@ -42,11 +54,12 @@ public class FireTheWorks : UdonSharpBehaviour
     public void CheckCooldown()
     {
 	_currentTime = Networking.GetServerTimeInMilliseconds();
+        int _cooldownDelayMs = cooldownDelay * 60000;
 	if (_cooldownStart == 0) {
 	    _cooldownActive = false;
 	}
-	// spam delay of 15 minutes between each firework session
-        else if (_currentTime - _cooldownStart <= 900000) { 
+	// only fire if timer has exceeded cooldown delay
+        else if (_currentTime - _cooldownStart <= _cooldownDelayMs) { 
 	    _cooldownActive = true;
 	}
 	else {
@@ -58,7 +71,7 @@ public class FireTheWorks : UdonSharpBehaviour
     {
 	UpdateCooldown();
 	target.SetActive(true);
-	soundEffect.Play();
+        audioSfxSource.PlayOneShot(audioSfxClip, 0f);
 	SendCustomEventDelayedSeconds(nameof(DisableTarget), 17.0f);
     }
 	
