@@ -7,14 +7,17 @@ using VRC.Udon.Common.Interfaces;
 
 public class FireTheWorks : UdonSharpBehaviour
 {   
-    [Header("Target GameObject")]
-    [Tooltip("This will be enabled/disabled with a cooldown")]
+    [Header("Toggle Settings")]
+    [Tooltip("Target gameobject that will be toggled")]
     public GameObject target;
+    [Tooltip("How long in seconds the target is active")]
+    [Range(0.0f, 30.0f)]
+    public float activeFor = 17.0f;
     
-    [Header("SFX Source")]
+    [Header("SFX Sources")]
     [Tooltip("Audio source object to be used")]
     public AudioSource sfxSource;
-    [Tooltip("Audio clip to be used")]
+    [Tooltip("Audio clip object to be used")]
     public AudioClip sfxClip;
     
     [Header("Cooldown Timer")]
@@ -72,7 +75,7 @@ public class FireTheWorks : UdonSharpBehaviour
 	UpdateCooldown();
 	target.SetActive(true);
         sfxSource.PlayOneShot(sfxClip);
-	SendCustomEventDelayedSeconds(nameof(DisableTarget), 17.0f);
+	SendCustomEventDelayedSeconds(nameof(DisableTarget), activeFor);
     }
 	
     public void DisableTarget()
