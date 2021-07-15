@@ -1,30 +1,23 @@
-﻿
+
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-public class MenuPanelDisable : UdonSharpBehaviour
+public class MenuButtonDisable : UdonSharpBehaviour
 {
-	public GameObject toggleButtonOff;
-	public GameObject toggleButtonOn;
-	public GameObject toggleMenu1;
-	public GameObject toggleMenu2;
-	public GameObject togglePanel;
-	public AudioSource audioDisableSrc;
-	public AudioClip audioDisableClip;
+	public GameObject _toggleButtonOff;
+	public GameObject _toggleButtonOn;
+	public AudioSource _audioDisableSrc;
+	public AudioClip _audioDisableClip;
 	
     void Interact()
     {
-		if (toggleButtonOn.activeSelf)
+		if (_toggleButtonOn.activeSelf)
 		{
-			toggleButtonOff.SetActive(true);
-			toggleButtonOn.SetActive(false);
-			toggleMenu1.SetActive(false);
-			toggleMenu2.SetActive(false);
-			togglePanel.SetActive(false);
-			audioDisableSrc.clip = audioDisableClip;
-			audioDisableSrc.Play();
+			_toggleButtonOff.SetActive(true);
+			_toggleButtonOn.SetActive(false);
+			_audioDisableSrc.PlayOneShot(_audioDisableClip);
 		}
     }
 }
