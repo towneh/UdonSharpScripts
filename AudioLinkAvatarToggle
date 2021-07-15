@@ -1,0 +1,23 @@
+
+using UdonSharp;
+using UnityEngine;
+using VRC.SDKBase;
+using VRC.Udon;
+
+public class AudioLinkAvatarToggle : UdonSharpBehaviour
+{
+   public Camera _avaCamToggle;
+	 public MeshRenderer _avaMRToggle;
+	
+	 public void _DisableAvatar()
+	 {
+      _avaCamToggle.enabled = false;
+		  _avaMRToggle.enabled = false;
+	 }
+	
+	 public void _EnableAvatar()
+	 {
+	    _avaCamToggle.enabled = true;
+	    _avaMRToggle.enabled = true;
+	 }
+}
