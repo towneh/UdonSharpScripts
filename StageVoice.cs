@@ -23,14 +23,14 @@ public class StageVoice : UdonSharpBehaviour
 	
     [Header("Modified Player Voice")]
     [Tooltip("New player volume")]
-    [Range(0f, 24f)]
-    public float modifiedVoiceGain = 15f;
+    [Range(-20f, 24f)]
+    public float modifiedVoiceGain = -20f;
 
     [Tooltip("The end of the range for hearing a user's voice")]
-    public float modifiedVoiceFar = 25f;
+    public float modifiedVoiceFar = 500f;
 
     [Tooltip("The near radius in meters where player audio starts to fall off, it is recommended to keep this at 0")]
-    public float modifiedVoiceNear = 0f;
+    public float modifiedVoiceNear = 250f;
 	
     public void OnPlayerTriggerEnter(VRCPlayerApi player)
     {
