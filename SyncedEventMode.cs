@@ -59,7 +59,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	
 	public void _ToggleTarget()
 	{
-	    Debug.Log("d: Event Mode Toggled!");
+	    Debug.Log("d: World event mode toggle request received");
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
@@ -81,6 +81,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	
 	public void _ToggleTargetTrue()
 	{
+	    Debug.Log("d: World event mode true request received");
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
@@ -93,6 +94,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	
 	public void _ToggleTargetFalse()
 	{
+	    Debug.Log("d: World event mode false request received");
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
