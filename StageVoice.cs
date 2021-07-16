@@ -8,37 +8,37 @@ public class StageVoice : UdonSharpBehaviour
 {
     [Header("Voice Box Area")]
     [Tooltip("The collider which influences voice range")]
-    public Collider voiceBox;
+    public Collider _voiceBox;
 	
     [Header("Original Player Voice")]
     [Tooltip("Existing player volume")]
     [Range(0f, 24f)]
-    public float originalVoiceGain = 15f;
+    public float _originalVoiceGain = 15f;
 
     [Tooltip("The end of the range for hearing a user's voice")]
-    public float originalVoiceFar = 25f;
+    public float _originalVoiceFar = 25f;
 
     [Tooltip("The near radius in meters where player audio starts to fall off, it is recommended to keep this at 0")]
-    public float originalVoiceNear = 0f;
+    public float _originalVoiceNear = 0f;
 	
     [Header("Modified Player Voice")]
     [Tooltip("New player volume")]
     [Range(-20f, 24f)]
-    public float modifiedVoiceGain = -20f;
+    public float _modifiedVoiceGain = -20f;
 
     [Tooltip("The end of the range for hearing a user's voice")]
-    public float modifiedVoiceFar = 500f;
+    public float _modifiedVoiceFar = 500f;
 
     [Tooltip("The near radius in meters where player audio starts to fall off, it is recommended to keep this at 0")]
-    public float modifiedVoiceNear = 250f;
+    public float _modifiedVoiceNear = 250f;
 	
     public void OnPlayerTriggerEnter(VRCPlayerApi player)
     {
         if (!player.isLocal) {
 	    // Player voice
-            player.SetVoiceGain(modifiedVoiceGain);
-            player.SetVoiceDistanceFar(modifiedVoiceFar);
-            player.SetVoiceDistanceNear(modifiedVoiceNear);
+            player.SetVoiceGain(_modifiedVoiceGain);
+            player.SetVoiceDistanceFar(_modifiedVoiceFar);
+            player.SetVoiceDistanceNear(_modifiedVoiceNear);
 	}
     }
 	
@@ -46,9 +46,9 @@ public class StageVoice : UdonSharpBehaviour
     {
         if (!player.isLocal) {
 	    // Player voice
-            player.SetVoiceGain(modifiedVoiceGain);
-            player.SetVoiceDistanceFar(modifiedVoiceFar);
-            player.SetVoiceDistanceNear(modifiedVoiceNear);
+            player.SetVoiceGain(_modifiedVoiceGain);
+            player.SetVoiceDistanceFar(_modifiedVoiceFar);
+            player.SetVoiceDistanceNear(_modifiedVoiceNear);
 	}
     }
 	
@@ -56,9 +56,9 @@ public class StageVoice : UdonSharpBehaviour
     {
         if (!player.isLocal) {
 	    // Player voice
-            player.SetVoiceGain(originalVoiceGain);
-            player.SetVoiceDistanceFar(originalVoiceFar);
-            player.SetVoiceDistanceNear(originalVoiceNear);
+            player.SetVoiceGain(_originalVoiceGain);
+            player.SetVoiceDistanceFar(_originalVoiceFar);
+            player.SetVoiceDistanceNear(_originalVoiceNear);
  	}
     }
 }
