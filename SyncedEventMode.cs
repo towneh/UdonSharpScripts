@@ -33,7 +33,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    _isEventOn = false;
 	}
 	   
-    public override void Interact()
+        public override void Interact()
 	{
 	    SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTarget");
 	}
