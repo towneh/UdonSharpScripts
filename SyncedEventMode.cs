@@ -60,13 +60,6 @@ public class SyncedEventMode : UdonSharpBehaviour
 	public void _ToggleTarget()
 	{
 	    Debug.Log("d: World event mode toggle request received");
-	    foreach(string _adminPlayers in _eventAdmins) {
-                if (Networking.LocalPlayer.displayName == _adminPlayers) return;
-	    }
-	    _videoPlayerCanvas.SetActive(!_videoPlayerCanvas.activeSelf);
-	    _staffDoor.SetActive(!_staffDoor.activeSelf);
-	    _gfxButtonOff.SetActive(!_gfxButtonOff.activeSelf);
-	    _gfxButtonOn.SetActive(!_gfxButtonOn.activeSelf);
 	    if (_isEventOn)
 	    {
 		_audioToggleSrc.PlayOneShot(_audioDisableClip);
@@ -75,33 +68,40 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    {
 		_audioToggleSrc.PlayOneShot(_audioEnableClip);
 	    }
+	    _gfxButtonOff.SetActive(!_gfxButtonOff.activeSelf);
+	    _gfxButtonOn.SetActive(!_gfxButtonOn.activeSelf);
 	    _isEventOn = !_isEventOn;
+	    foreach(string _adminPlayers in _eventAdmins) {
+                if (Networking.LocalPlayer.displayName == _adminPlayers) return;
+	    }
+	    _videoPlayerCanvas.SetActive(!_videoPlayerCanvas.activeSelf);
+	    _staffDoor.SetActive(!_staffDoor.activeSelf);
             //RequestSerialization();
 	}
 	
 	public void _ToggleTargetTrue()
 	{
 	    Debug.Log("d: World event mode true request received");
+            _gfxButtonOff.SetActive(false);
+	    _gfxButtonOn.SetActive(true);
+	    _isEventOn = true;
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
 	    _videoPlayerCanvas.SetActive(false);
 	    _staffDoor.SetActive(true);
-	    _gfxButtonOff.SetActive(false);
-	    _gfxButtonOn.SetActive(true);
-	    _isEventOn = true;
 	}
 	
 	public void _ToggleTargetFalse()
 	{
 	    Debug.Log("d: World event mode false request received");
+	    _gfxButtonOff.SetActive(true);
+	    _gfxButtonOn.SetActive(false);
+	    _isEventOn = false;
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
 	    _videoPlayerCanvas.SetActive(false);
 	    _staffDoor.SetActive(true);
-            _gfxButtonOff.SetActive(true);
-	    _gfxButtonOn.SetActive(false);
-	    _isEventOn = false;
 	}
 }
