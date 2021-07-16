@@ -33,7 +33,8 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    _isEventOn = false;
 	}
 	   
-        public override void Interact()
+        // You can ignore the below Interact function and use UT Interact Trigger instead if you want
+	public override void Interact()
 	{
 	    //we only want this to work for staff
 	    foreach(string _adminPlayers in _eventAdmins) {
