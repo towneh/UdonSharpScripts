@@ -76,7 +76,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 		_audioToggleSrc.PlayOneShot(_audioEnableClip);
 	    }
 	    _isEventOn = !_isEventOn;
-            RequestSerialization();
+            //RequestSerialization();
 	}
 	
 	public void _ToggleTargetTrue()
