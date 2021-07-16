@@ -35,7 +35,11 @@ public class SyncedEventMode : UdonSharpBehaviour
 	   
         public override void Interact()
 	{
-	    SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTarget");
+	    foreach(string _adminPlayers in _eventAdmins) {
+                if (Networking.LocalPlayer.displayName == _adminPlayers) {
+	            SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTarget");
+		}
+	    }
 	}
 	
 	public override void OnPlayerJoined(VRCPlayerApi player)
