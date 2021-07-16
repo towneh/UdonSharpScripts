@@ -35,6 +35,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	   
         public override void Interact()
 	{
+	    //we only want this to work for staff
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) {
 	            SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTarget");
@@ -71,12 +72,12 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    _gfxButtonOff.SetActive(!_gfxButtonOff.activeSelf);
 	    _gfxButtonOn.SetActive(!_gfxButtonOn.activeSelf);
 	    _isEventOn = !_isEventOn;
+	    //staff are immune to the gameobject toggle section
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
 	    _videoPlayerCanvas.SetActive(!_videoPlayerCanvas.activeSelf);
 	    _staffDoor.SetActive(!_staffDoor.activeSelf);
-            //RequestSerialization();
 	}
 	
 	public void _ToggleTargetTrue()
@@ -85,6 +86,7 @@ public class SyncedEventMode : UdonSharpBehaviour
             _gfxButtonOff.SetActive(false);
 	    _gfxButtonOn.SetActive(true);
 	    _isEventOn = true;
+	    //staff are immune to the gameobject toggle section
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
@@ -98,6 +100,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    _gfxButtonOff.SetActive(true);
 	    _gfxButtonOn.SetActive(false);
 	    _isEventOn = false;
+	    //staff are immune to the gameobject toggle section
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
