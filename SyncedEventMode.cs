@@ -1,4 +1,4 @@
-﻿
+
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -32,8 +32,8 @@ public class SyncedEventMode : UdonSharpBehaviour
 	{
 	    _isEventOn = false;
 	}
-	   
-        // You can ignore the below Interact function and use UT Interact Trigger instead if you want
+	
+	/* // You can ignore the below Interact function and use UT Interact Trigger instead if you want (commented out by default)
 	public override void Interact()
 	{
 	    //we only want this to work for staff
@@ -42,49 +42,50 @@ public class SyncedEventMode : UdonSharpBehaviour
 	            SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTarget");
 		}
 	    }
-	}
-	
+	} */
+	   
 	public override void OnPlayerJoined(VRCPlayerApi player)
 	{
 	    if (Networking.IsMaster)
 	        {
 		    if (_isEventOn)
 		        {
-			    SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTargetTrue");
+			    //Debug.Log("d: Late join event True sent");
+			    SendCustomNetworkEvent(NetworkEventTarget.All, "ToggleTargetTrue");
 			}
 			else
 			{
-			    SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTargetFalse");
+			    //Debug.Log("d: Late join event False sent");
+			    SendCustomNetworkEvent(NetworkEventTarget.All, "ToggleTargetFalse");
 			}
 		}
 	}
 	
-	public void _ToggleTarget()
+	public void ToggleTarget()
 	{
-	    Debug.Log("d: World event mode toggle request received");
+	    //Debug.Log("d: World event mode toggle request received");
 	    if (_isEventOn)
 	    {
-		_audioToggleSrc.PlayOneShot(_audioDisableClip);
+	        _audioToggleSrc.PlayOneShot(_audioDisableClip);
             }
 	    else
 	    {
-		_audioToggleSrc.PlayOneShot(_audioEnableClip);
+                _audioToggleSrc.PlayOneShot(_audioEnableClip);
 	    }
 	    _gfxButtonOff.SetActive(!_gfxButtonOff.activeSelf);
 	    _gfxButtonOn.SetActive(!_gfxButtonOn.activeSelf);
 	    _isEventOn = !_isEventOn;
-	    //staff are immune to the gameobject toggle section
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
-	    _videoPlayerCanvas.SetActive(!_videoPlayerCanvas.activeSelf);
+            _videoPlayerCanvas.SetActive(!_videoPlayerCanvas.activeSelf);
 	    _staffDoor.SetActive(!_staffDoor.activeSelf);
 	}
 	
-	public void _ToggleTargetTrue()
+	public void ToggleTargetTrue()
 	{
-	    Debug.Log("d: World event mode true request received");
-            _gfxButtonOff.SetActive(false);
+	    //Debug.Log("d: World event mode true request received");
+	    _gfxButtonOff.SetActive(false);
 	    _gfxButtonOn.SetActive(true);
 	    _isEventOn = true;
 	    //staff are immune to the gameobject toggle section
@@ -95,17 +96,17 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    _staffDoor.SetActive(true);
 	}
 	
-	public void _ToggleTargetFalse()
+	public void ToggleTargetFalse()
 	{
-	    Debug.Log("d: World event mode false request received");
-	    _gfxButtonOff.SetActive(true);
+	    //Debug.Log("d: World event mode false request received");
+            _gfxButtonOff.SetActive(true);
 	    _gfxButtonOn.SetActive(false);
 	    _isEventOn = false;
 	    //staff are immune to the gameobject toggle section
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) return;
 	    }
-	    _videoPlayerCanvas.SetActive(false);
-	    _staffDoor.SetActive(true);
+	    _videoPlayerCanvas.SetActive(true);
+	    _staffDoor.SetActive(false);
 	}
 }
