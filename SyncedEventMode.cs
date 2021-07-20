@@ -52,12 +52,12 @@ public class SyncedEventMode : UdonSharpBehaviour
 	        {
 		    if (_isEventOn)
 		        {
-			    //Debug.Log("d: Late join event True sent");
+			    //Debug.Log("[SyncedEventMode] Late join event True sent");
 			    SendCustomNetworkEvent(NetworkEventTarget.All, "ToggleTargetTrue");
 			}
 			else
 			{
-			    //Debug.Log("d: Late join event False sent");
+			    //Debug.Log("[SyncedEventMode] Late join event False sent");
 			    SendCustomNetworkEvent(NetworkEventTarget.All, "ToggleTargetFalse");
 			}
 		}
@@ -65,7 +65,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	
 	public void ToggleTarget()
 	{
-	    //Debug.Log("d: World event mode toggle request received");
+	    //Debug.Log("[SyncedEventMode] World event mode toggle request received");
 	    if (_isEventOn)
 	    {
 	        _audioToggleSrc.PlayOneShot(_audioDisableClip);
@@ -87,7 +87,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	
 	public void ToggleTargetTrue()
 	{
-	    //Debug.Log("d: World event mode true request received");
+	    //Debug.Log("[SyncedEventMode] World event mode true request received");
 	    _gfxButtonOff.SetActive(false);
 	    _gfxButtonOn.SetActive(true);
 	    _isEventOn = true;
@@ -102,7 +102,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	
 	public void ToggleTargetFalse()
 	{
-	    //Debug.Log("d: World event mode false request received");
+	    //Debug.Log("[SyncedEventMode] World event mode false request received");
             _gfxButtonOff.SetActive(true);
 	    _gfxButtonOn.SetActive(false);
 	    _isEventOn = false;
