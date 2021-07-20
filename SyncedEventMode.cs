@@ -11,6 +11,8 @@ public class SyncedEventMode : UdonSharpBehaviour
     public GameObject _videoPlayerCanvas;
     [Tooltip("Door & Collider")]
     public GameObject _staffDoor;
+    [Tooltip("AudioLink Canvas")]
+    public GameObject _audiolinkCanvas;
 	
     [Header("Button Behaviour")] [Tooltip("Off Button Graphic")]
     public GameObject _gfxButtonOff;
@@ -26,7 +28,7 @@ public class SyncedEventMode : UdonSharpBehaviour
     [Header("DDVR Staff")] [Tooltip("Who has access override during event mode")]
     public string[] _eventAdmins;
 	
-    [UdonSynced] private bool _isEventOn;
+    private bool _isEventOn;
     
 	private void Start() 
 	{
@@ -39,7 +41,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    //we only want this to work for staff
 	    foreach(string _adminPlayers in _eventAdmins) {
                 if (Networking.LocalPlayer.displayName == _adminPlayers) {
-	            SendCustomNetworkEvent(NetworkEventTarget.All, "_ToggleTarget");
+	            SendCustomNetworkEvent(NetworkEventTarget.All, "ToggleTarget");
 		}
 	    }
 	} */
@@ -80,6 +82,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    }
             _videoPlayerCanvas.SetActive(!_videoPlayerCanvas.activeSelf);
 	    _staffDoor.SetActive(!_staffDoor.activeSelf);
+	    _audiolinkCanvas.GetComponent<Canvas> ().enabled = !_isEventOn;
 	}
 	
 	public void ToggleTargetTrue()
@@ -94,6 +97,7 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    }
 	    _videoPlayerCanvas.SetActive(false);
 	    _staffDoor.SetActive(true);
+	    _audiolinkCanvas.GetComponent<Canvas> ().enabled = false;
 	}
 	
 	public void ToggleTargetFalse()
@@ -108,5 +112,6 @@ public class SyncedEventMode : UdonSharpBehaviour
 	    }
 	    _videoPlayerCanvas.SetActive(true);
 	    _staffDoor.SetActive(false);
+	    _audiolinkCanvas.GetComponent<Canvas> ().enabled = true;
 	}
 }
